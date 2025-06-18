@@ -1,6 +1,6 @@
 1. gün Gömülü sistem katmanları
 
-2. gün git bash işlemleri
+**2. gün git bash işlemleri**
 
 $ git config --global user.name "[name]"
 
@@ -21,5 +21,5 @@ git add .
 git commit -m "İlk commit"
 git branch -M main
 git remote add origin https://github.com/Barkinili/asisprojeler.git
-git push -u origin main
+git push -u origin main 
 
