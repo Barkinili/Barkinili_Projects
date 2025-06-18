@@ -1,6 +1,6 @@
-1. gün Gömülü sistem katmanları
+*1. gün Gömülü sistem katmanları*
 
-**2. gün git bash işlemleri**
+*2. gün git bash işlemleri*
 
 $ git config --global user.name "[name]"
 
@@ -23,3 +23,4 @@ git branch -M main
 git remote add origin https://github.com/Barkinili/asisprojeler.git
 git push -u origin main 
 
+*3. gün circular buffer çalışması*
