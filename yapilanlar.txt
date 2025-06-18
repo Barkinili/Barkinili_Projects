@@ -4,8 +4,22 @@
 
 $ git config --global user.name "[name]"
 
-Tüm yerel depolar için kullanıcı bilgilerini yapılandırın
+Tüm yerel depolar için kullanıcı bilgilerini yapılandırma
 
 $ git config --global user.email "[email address]"
 
-Tüm yerel depolar için eposta bilgilerini yapılandırın
+Tüm yerel depolar için eposta bilgilerini yapılandırma
+
+masaüstü üzerinde bir dosya oluşturup dosya içine  readme ve txt oluşturma için gerekli kodlar 
+cd ~/Desktop
+mkdir proje
+cd proje
+touch dosya.txt
+touch README.md
+git init
+git add .
+git commit -m "İlk commit"
+git branch -M main
+git remote add origin https://github.com/kullaniciadi/depoadi.git
+git push -u origin main
+
