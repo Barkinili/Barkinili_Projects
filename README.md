@@ -4,7 +4,7 @@ Bu mainde isterler sonucunda elde edilen araştırma sonuçları ve kodlar yer a
 
 
 ----------------------------------------------------------------------------
-__1. gün Gömülü sistem katmanları__
+__1. GÜN GÖMÜLÜ YAZILIM KATMANLARI ARAŞTIRMASI__
 
 GÖMÜLÜ YAZILIM KATMANLARI 
 
@@ -72,7 +72,7 @@ NOTLAR:
 
 
 ----------------------------------------------------------------------------
-__2. gün git bash işlemleri__
+__2. GÜN GİT HUB VE GİT BASH KULLANIM ÖĞRENİMİ__
 
 Bu bilgiler başlangıç için gereklidir.
 
@@ -106,5 +106,5 @@ git push -u origin main
 
 
 ----------------------------------------------------------------------------
-__3. gün circular buffer çalışması__
+__3. GÜN CİRCULAR BUFFER İLE C DİLİNDE ÖRNEKLEME__
 
