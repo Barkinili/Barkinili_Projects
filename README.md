@@ -15,7 +15,7 @@ GÖMÜLÜ YAZILIM KATMANLARI
 - Middleware veya API'leri kullanarak alt katmanlara erişir.
 
 2. Middleware Layer (Ara Yazılım Katmanı)
-- Uygulama ile işletim sistemi/donanım arasındaki ara katmandır.
+- Uygulama programlama arabirimi oluşturmamızı sağlayan ara yazılım katmanıdır.
 - Dosya sistemi, ağ protokolleri, USB sürücüsü, kriptografi gibi hizmetler sunar.
 - Kod tekrarını azaltır, taşınabilirliği artırır.
 - Örnekler: LWIP, FATFS, MQTT, USB stack, GUI kütüphaneleri
