@@ -1,2 +1,11 @@
 1. gün Gömülü sistem katmanları
 
+2. gün git bash işlemleri
+
+$ git config --global user.name "[name]"
+
+Tüm yerel depolar için kullanıcı bilgilerini yapılandırın
+
+$ git config --global user.email "[email address]"
+
+Tüm yerel depolar için eposta bilgilerini yapılandırın
