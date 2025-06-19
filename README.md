@@ -1,4 +1,4 @@
-# ASISP PROJELER
+# ASIS PROJELER
 
 Bu `main` dosyasinda isterler sonucunda elde edilen arastirma sonuclari ve kodlar yer almaktadir.
 
