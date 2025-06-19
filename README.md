@@ -1,69 +1,70 @@
-*ASİSPROJELER*
+# ASISP PROJELER
 
-Bu mainde isterler sonucunda elde edilen araştırma sonuçları ve kodlar yer almaktadır.
+Bu `main` dosyasinda isterler sonucunda elde edilen arastirma sonuclari ve kodlar yer almaktadir.
 
-----------------------------------------------------------------------------
-__1. GÜN GÖMÜLÜ YAZILIM KATMANLARI__
+---
 
-GÖMÜLÜ YAZILIM KATMANLARI 
+## 1. GÜN GÖMÜLÜ YAZILIM KATMANLARI
 
-1. Application Layer (Uygulama Katmanı)
-- En üst katmandır.
-- Kullanıcının isteğini yerine getirir.
-- Sensör okuma, veri işleme, ekran yazdırma gibi görevler burada yazılır.
-- Middleware veya API'leri kullanarak alt katmanlara erişir.
+### GÖMÜLÜ YAZILIM KATMANLARI
 
-2. Middleware Layer (Ara Yazılım Katmanı)
-- Middleware , uygulama programlama arabirimi oluşturmamızı sağlayan ara yazılım katmanıdır. 
-- Dosya sistemi, ağ protokolleri, USB sürücüsü, kriptografi gibi hizmetler sunar.
-- Kod tekrarını azaltır, taşınabilirliği artırır.
-- Örnekler: LWIP, FATFS, MQTT, USB stack, GUI kütüphaneleri
-- RTOS değildir ama RTOS üzerinde çalışır.
-- RTOS ≠ Middleware
+1. **Application Layer (Uygulama Katmani)**  
+   - En ust katmandir.  
+   - Kullanicinin istegini yerine getirir.  
+   - Sensor okuma, veri isleme, ekran yazdirma gibi gorevler burada yazilir.  
+   - Middleware veya API'leri kullanarak alt katmanlara erisir.
 
-3. RTOS Layer (Gerçek Zamanlı İşletim Sistemi)
-- Görevleri planlar, zamanlayıcı çalıştırır, kaynakları yönetir.
-- Görevler arası geçiş, öncelik, zamanlama sağlar.
-- Örnekler: FreeRTOS, ThreadX (Azure RTOS), QNX, embOS
-- Middleware bu katmanın üstünde çalışır.
+2. **Middleware Layer (Ara Yazilim Katmani)**  
+   - Middleware, uygulama programlama arabirimi olusturmamizi saglayan ara yazilim katmanidir.  
+   - Dosya sistemi, ag protokolleri, USB surucusu, kriptografi gibi hizmetler sunar.  
+   - Kod tekrarini azaltir, tasinabilirligi artirir.  
+   - Ornekler: LWIP, FATFS, MQTT, USB stack, GUI kutuphaneleri  
+   - RTOS degildir ama RTOS uzerinde calisir.  
+   - RTOS ≠ Middleware
 
-4. Hardware Abstraction Layer (HAL)
-- Donanım erişimini kolaylaştırır.
-- Her mikrodenetleyiciye özel sürücüler içerir.
-- GPIO, UART, ADC gibi çevre birimlerini soyutlar.
-- Kodun taşınabilir olmasına katkı sağlar.
+3. **RTOS Layer (Gercek Zamanli Isletim Sistemi)**  
+   - Gorevleri planlar, zamanlayici calistirir, kaynaklari yonetir.  
+   - Gorevler arasi gecis, oncelik, zamanlama saglar.  
+   - Ornekler: FreeRTOS, ThreadX (Azure RTOS), QNX, embOS  
+   - Middleware bu katmanin ustunde calisir.
 
-5. Low-Level Drivers / Peripherals
-- Mikrodenetleyicinin doğrudan kontrol edildiği katmandır.
-- Register tabanlı donanım kontrolü buradadır.
-- Örneğin: GPIO pin'ine HIGH/LOW yazmak.
+4. **Hardware Abstraction Layer (HAL)**  
+   - Donanim erisimini kolaylastirir.  
+   - Her mikrondenetleyiciye ozel suruculer icerir.  
+   - GPIO, UART, ADC gibi cevre birimlerini soyutlar.  
+   - Kodun tasinabilir olmasina katki saglar.
 
-6. Hardware (Fiziksel Katman)
-- Gerçek fiziksel devre, mikrodenetleyici, sensörler, butonlar, motorlar vs.
+5. **Low-Level Drivers / Peripherals**  
+   - Mikrondenetleyicinin dogrudan kontrol edildigi katmandir.  
+   - Register tabanli donanim kontrolu buradadir.  
+   - Ornegin: GPIO pin'ine HIGH/LOW yazmak.
 
+6. **Hardware (Fiziksel Katman)**  
+   - Gercek fiziksel devre, mikrondenetleyici, sensorler, butonlar, motorlar vs.
 
-MUTEX ve SEMAPHORE BENZETMESİ:
+---
 
-1. Mutex (Karşılıklı Dışlama)
-- Tuvalet anahtarı gibidir.
-- Anahtar kimdeyse sadece o girebilir.
-- Diğerleri bekler. Sadece bir kişi kullanabilir.
+### MUTEX ve SEMAPHORE BENZETMESI
 
-2. Binary Semaphore
-- Tuvalet kapısının kilidi gibidir.
-- İçeri biri girince kapı kapanır.
-- Diğerleri içerisi boşalana kadar bekler.
+1. **Mutex (Karsilikli Dislama)**  
+   - Tuvalet anahtari gibidir.  
+   - Anahtar kimdeyse sadece o girebilir.  
+   - Digerleri bekler. Sadece bir kisi kullanabilir.
 
-3. Counting Semaphore
-- Birden fazla tuvaletin olduğu bir yerde sıra gibidir.
-- Örneğin 3 kabin varsa 3 kişi aynı anda girebilir.
-- Diğerleri sırada bekler. Bekleyen sayısı semafor sayısıdır.
+2. **Binary Semaphore**  
+   - Tuvalet kapisinin kilidi gibidir.  
+   - Iceri biri girince kapi kapanir.  
+   - Digerleri icerisi bosalana kadar bekler.
 
+3. **Counting Semaphore**  
+   - Birden fazla tuvaletin oldugu bir yerde sira gibidir.  
+   - Ornegin 3 kabin varsa 3 kisi ayni anda girebilir.  
+   - Digerleri sirada bekler. Bekleyen sayisi semafor sayisidir.
 
-NOTLAR:
+---
 
-- Middleware RTOS değildir, RTOS üzerinde çalışır.
-- RTOS sistem kaynaklarını yönetirken, middleware uygulama desteği sunar.
-- Uygulama katmanı yalnızca üstteki iş mantığını içerir.
+### NOTLAR
 
-
+- Middleware RTOS degildir, RTOS uzerinde calisir.  
+- RTOS sistem kaynaklarini yonetirken, middleware uygulama destegi sunar.  
+- Uygulama katmani yalnizca ustteki is mantigini icerir.
