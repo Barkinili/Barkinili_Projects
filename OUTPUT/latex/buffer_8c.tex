@@ -1,0 +1,241 @@
+\doxysection{C\+:/\+Users/\+Barkın İli/\+Desktop/newnew/buffer.c File Reference}
+\hypertarget{buffer_8c}{}\label{buffer_8c}\index{C:/Users/Barkın İli/Desktop/newnew/buffer.c@{C:/Users/Barkın İli/Desktop/newnew/buffer.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}}~10
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{buffer_8c_a7af8fc86526f445deba0faaa08cfa5ea}{push}} (char value)
+\item 
+int \mbox{\hyperlink{buffer_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf}{pop}} (char \texorpdfstring{$\ast$}{*}value)
+\item 
+void \mbox{\hyperlink{buffer_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4}{buffer\+\_\+goster}} ()
+\item 
+int \mbox{\hyperlink{buffer_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{buffer_8c_a7f5af3da62986c73cd5c4e68dd450e78}{buffer}} \mbox{[}\mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}}\mbox{]}
+\item 
+int \mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}} = 0
+\item 
+int \mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}} = 0
+\item 
+int \mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{buffer_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{buffer_8c_a40264efa24230346338708bbb51e6616}\index{buffer.c@{buffer.c}!BUYUKLUK@{BUYUKLUK}}
+\index{BUYUKLUK@{BUYUKLUK}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{BUYUKLUK}{BUYUKLUK}}
+{\footnotesize\ttfamily \label{buffer_8c_a40264efa24230346338708bbb51e6616} 
+\#define BUYUKLUK~10}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00004}{4}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{buffer_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{buffer_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4}\index{buffer.c@{buffer.c}!buffer\_goster@{buffer\_goster}}
+\index{buffer\_goster@{buffer\_goster}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{buffer\_goster()}{buffer\_goster()}}
+{\footnotesize\ttfamily \label{buffer_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4} 
+void buffer\+\_\+goster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00031}{31}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Buffer\ durumu:\ ["{}});}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}};\ i++)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/"{}});}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ aktif\ =\ 0;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}\ <\ \mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}})\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >=\ \mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}\ \&\&\ i\ <\ \mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}})\ aktif\ =\ 1;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}\ >\ \mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}})\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >=\ \mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}\ ||\ i\ <\ \mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}})\ aktif\ =\ 1;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}}\ ==\ \mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}})\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aktif\ =\ 1;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (aktif)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ \%c"{}},\ \mbox{\hyperlink{buffer_8c_a7f5af3da62986c73cd5c4e68dd450e78}{buffer}}[i]);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/"{}});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ ]\(\backslash\)n"{}});}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}
+\Hypertarget{buffer_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{buffer.c@{buffer.c}!main@{main}}
+\index{main@{main}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{buffer_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00056}{56}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{int}\ secim;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{char}\ giris[100];}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{char}\ alinan;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n1\ -\/\ Ekle\ (coklu\ harf\ veya\ rakam)\(\backslash\)n2\ -\/\ Oku\ (cikart)\(\backslash\)n0\ -\/\ Cikis\(\backslash\)nSecim:\ "{}});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%d"{}},\ \&secim);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((getchar())\ !=\ \textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (secim)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Giris\ (birden\ fazla\ harf/rakam\ yaz):\ "{}});}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fgets(giris,\ \textcolor{keyword}{sizeof}(giris),\ stdin);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ giris[strcspn(giris,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ strlen(giris);\ i++)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_a7af8fc86526f445deba0faaa08cfa5ea}{push}}(giris[i]))\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Eklendi:\ \%c\(\backslash\)n"{}},\ giris[i]);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Buffer\ dolu,\ eklenemedi:\ \%c\(\backslash\)n"{}},\ giris[i]);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{buffer_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4}{buffer\_goster}}();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf}{pop}}(\&alinan))\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Okunan\ karakter:\ \%c\(\backslash\)n"{}},\ alinan);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Buffer\ bos!\(\backslash\)n"{}});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{buffer_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4}{buffer\_goster}}();}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Programdan\ cikiliyor...\(\backslash\)n"{}});}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Gecersiz\ secim!\(\backslash\)n"{}});}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00102\ \}}
+
+\end{DoxyCode}
+\Hypertarget{buffer_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf}\index{buffer.c@{buffer.c}!pop@{pop}}
+\index{pop@{pop}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \label{buffer_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf} 
+int pop (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00021}{21}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Bo�}}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ *value\ =\ \mbox{\hyperlink{buffer_8c_a7f5af3da62986c73cd5c4e68dd450e78}{buffer}}[\mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}];}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}\ =\ (\mbox{\hyperlink{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}}\ +\ 1)\ \%\ \mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}};}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}}-\/-\/;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00029\ \}}
+
+\end{DoxyCode}
+\Hypertarget{buffer_8c_a7af8fc86526f445deba0faaa08cfa5ea}\index{buffer.c@{buffer.c}!push@{push}}
+\index{push@{push}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily \label{buffer_8c_a7af8fc86526f445deba0faaa08cfa5ea} 
+int push (\begin{DoxyParamCaption}\item[{char}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00011}{11}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}}\ ==\ \mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}})\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Dolu}}
+\DoxyCodeLine{00014\ \ \ \ \ \}}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{buffer_8c_a7f5af3da62986c73cd5c4e68dd450e78}{buffer}}[\mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}}]\ =\ value;}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}}\ =\ (\mbox{\hyperlink{buffer_8c_a20358970b1abaf992eb85e071e454653}{head}}\ +\ 1)\ \%\ \mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}}++;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00019\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{buffer_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{buffer_8c_a7f5af3da62986c73cd5c4e68dd450e78}\index{buffer.c@{buffer.c}!buffer@{buffer}}
+\index{buffer@{buffer}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \label{buffer_8c_a7f5af3da62986c73cd5c4e68dd450e78} 
+char buffer\mbox{[}\mbox{\hyperlink{buffer_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00006}{6}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+\Hypertarget{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}\index{buffer.c@{buffer.c}!count@{count}}
+\index{count@{count}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{count}{count}}
+{\footnotesize\ttfamily \label{buffer_8c_ad43c3812e6d13e0518d9f8b8f463ffcf} 
+int count = 0}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00009}{9}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+\Hypertarget{buffer_8c_a20358970b1abaf992eb85e071e454653}\index{buffer.c@{buffer.c}!head@{head}}
+\index{head@{head}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily \label{buffer_8c_a20358970b1abaf992eb85e071e454653} 
+int head = 0}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00007}{7}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
+\Hypertarget{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe}\index{buffer.c@{buffer.c}!tail@{tail}}
+\index{tail@{tail}!buffer.c@{buffer.c}}
+\doxysubsubsection{\texorpdfstring{tail}{tail}}
+{\footnotesize\ttfamily \label{buffer_8c_aff39d864a6594bc5f4a5e365282e00fe} 
+int tail = 0}
+
+
+
+Definition at line \mbox{\hyperlink{buffer_8c_source_l00008}{8}} of file \mbox{\hyperlink{buffer_8c_source}{buffer.\+c}}.
+
