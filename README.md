@@ -52,14 +52,14 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
    - Diğerleri bekler. Sadece bir kişi kullanabilir.
 
 2. **Binary Semaphore**  
-   - Tuvalet kapısının kilidi gibidir.  
-   - İçeri biri girince kapı kapanır.  
+   - Tuvalet üzerindeki dolu ışığı gibir  
+   - İçeri biri girince kapı kapanır ve dolu ışığı yanar.  
    - Diğerleri içerisi boşalana kadar bekler.
 
 3. **Counting Semaphore**  
-   - Birden fazla tuvaletin olduğu bir yerde sıra gibidir.  
-   - Örneğin 3 kabin varsa 3 kişi aynı anda girebilir.  
-   - Diğerleri sırada bekler. Bekleyen sayısı semafor sayısıdır.
+   - Tuvaletin önünde oluşan sıradaki kişi sayısını belirler.  
+   - Örneğin kapının önünde 3 kişi aynı anda bekleyebilir.  
+   - Bekleyen sayısı semafor sayısıdır.
 
 ---
 
