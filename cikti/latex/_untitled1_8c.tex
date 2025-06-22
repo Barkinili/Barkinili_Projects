@@ -1,0 +1,157 @@
+\doxysection{C\+:/\+Users/barki/\+Desktop/doxy/\+Untitled1.c File Reference}
+\hypertarget{_untitled1_8c}{}\label{_untitled1_8c}\index{C:/Users/barki/Desktop/doxy/Untitled1.c@{C:/Users/barki/Desktop/doxy/Untitled1.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_untitled1_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}}~10
+\begin{DoxyCompactList}\small\item\em Tamponun (buffer) maksimum kapasitesi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_untitled1_8c_a7af8fc86526f445deba0faaa08cfa5ea}{push}} (char value)
+\begin{DoxyCompactList}\small\item\em Buffer\textquotesingle{}a karakter ekler (push islemi) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_untitled1_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf}{pop}} (char \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Buffer\textquotesingle{}dan karakter okur (pop islemi) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_untitled1_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4}{buffer\+\_\+goster}} ()
+\begin{DoxyCompactList}\small\item\em Buffer\textquotesingle{}in mevcut durumunu grafiksel olarak ekrana yazdirir. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_untitled1_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Programin giris noktasi (main fonksiyonu) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{_untitled1_8c_a7f5af3da62986c73cd5c4e68dd450e78}{buffer}} \mbox{[}\mbox{\hyperlink{_untitled1_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Dairesel tamponu temsil eden global degiskenler. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_untitled1_8c_a20358970b1abaf992eb85e071e454653}{head}} = 0
+\item 
+int \mbox{\hyperlink{_untitled1_8c_aff39d864a6594bc5f4a5e365282e00fe}{tail}} = 0
+\item 
+int \mbox{\hyperlink{_untitled1_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_untitled1_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_untitled1_8c_a40264efa24230346338708bbb51e6616}\index{Untitled1.c@{Untitled1.c}!BUYUKLUK@{BUYUKLUK}}
+\index{BUYUKLUK@{BUYUKLUK}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{BUYUKLUK}{BUYUKLUK}}
+{\footnotesize\ttfamily \label{_untitled1_8c_a40264efa24230346338708bbb51e6616} 
+\#define BUYUKLUK~10}
+
+
+
+Tamponun (buffer) maksimum kapasitesi. 
+
+\texorpdfstring{$<$}{<} Giris/\+Cikis islemleri icin gerekli kutuphane \texorpdfstring{$<$}{<} Karakter dizisi islemleri icin kutuphane 
+
+\label{doc-func-members}
+\Hypertarget{_untitled1_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_untitled1_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4}\index{Untitled1.c@{Untitled1.c}!buffer\_goster@{buffer\_goster}}
+\index{buffer\_goster@{buffer\_goster}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{buffer\_goster()}{buffer\_goster()}}
+{\footnotesize\ttfamily \label{_untitled1_8c_a9c10b2ea2713ce74a1e5dcae72f1c1d4} 
+void buffer\+\_\+goster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Buffer\textquotesingle{}in mevcut durumunu grafiksel olarak ekrana yazdirir. 
+
+Dolular karakterlerle, bos alanlar \textquotesingle{}-\/\textquotesingle{} ile gosterilir. \Hypertarget{_untitled1_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{Untitled1.c@{Untitled1.c}!main@{main}}
+\index{main@{main}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{_untitled1_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Programin giris noktasi (main fonksiyonu) 
+
+Kullaniciya etkilesimli bir menu sunar.
+\begin{DoxyEnumerate}
+\item Coklu karakter ekleme
+\item FIFO\textquotesingle{}dan karakter okuma
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Programdan cikis
+\end{DoxyEnumerate}
+
+\begin{DoxyReturn}{Returns}
+int Programdan cikis kodu 
+\end{DoxyReturn}
+\Hypertarget{_untitled1_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf}\index{Untitled1.c@{Untitled1.c}!pop@{pop}}
+\index{pop@{pop}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \label{_untitled1_8c_abc2989dc03f7bce1e5b7e77bc86d5cbf} 
+int pop (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Buffer\textquotesingle{}dan karakter okur (pop islemi) 
+
+Eger buffer bossa karakter okunamaz.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Okunan karakterin yazilacagi adres \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 1 basari, 0 basarisiz (buffer bos) 
+\end{DoxyReturn}
+\Hypertarget{_untitled1_8c_a7af8fc86526f445deba0faaa08cfa5ea}\index{Untitled1.c@{Untitled1.c}!push@{push}}
+\index{push@{push}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily \label{_untitled1_8c_a7af8fc86526f445deba0faaa08cfa5ea} 
+int push (\begin{DoxyParamCaption}\item[{char}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Buffer\textquotesingle{}a karakter ekler (push islemi) 
+
+Eger buffer doluysa karakter eklenemez.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Eklenecek karakter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 1 basari, 0 basarisiz (buffer dolu) 
+\end{DoxyReturn}
+
+
+\label{doc-var-members}
+\Hypertarget{_untitled1_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_untitled1_8c_a7f5af3da62986c73cd5c4e68dd450e78}\index{Untitled1.c@{Untitled1.c}!buffer@{buffer}}
+\index{buffer@{buffer}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \label{_untitled1_8c_a7f5af3da62986c73cd5c4e68dd450e78} 
+char buffer\mbox{[}\mbox{\hyperlink{_untitled1_8c_a40264efa24230346338708bbb51e6616}{BUYUKLUK}}\mbox{]}}
+
+
+
+Dairesel tamponu temsil eden global degiskenler. 
+
+Karakterleri tutacak olan buffer \Hypertarget{_untitled1_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}\index{Untitled1.c@{Untitled1.c}!count@{count}}
+\index{count@{count}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{count}{count}}
+{\footnotesize\ttfamily \label{_untitled1_8c_ad43c3812e6d13e0518d9f8b8f463ffcf} 
+int count = 0}
+
+Tampondaki mevcut karakter sayisi \Hypertarget{_untitled1_8c_a20358970b1abaf992eb85e071e454653}\index{Untitled1.c@{Untitled1.c}!head@{head}}
+\index{head@{head}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily \label{_untitled1_8c_a20358970b1abaf992eb85e071e454653} 
+int head = 0}
+
+Yeni karakterin eklenecegi konum \Hypertarget{_untitled1_8c_aff39d864a6594bc5f4a5e365282e00fe}\index{Untitled1.c@{Untitled1.c}!tail@{tail}}
+\index{tail@{tail}!Untitled1.c@{Untitled1.c}}
+\doxysubsubsection{\texorpdfstring{tail}{tail}}
+{\footnotesize\ttfamily \label{_untitled1_8c_aff39d864a6594bc5f4a5e365282e00fe} 
+int tail = 0}
+
+Okunacak karakterin konumu 
