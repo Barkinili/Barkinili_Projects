@@ -3,7 +3,7 @@
 Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve kodlar yer almaktadır.
 
 ---
-## 2. GÜN GİT HUB VE GİT BASH KULLANIM ÖĞRENİMİ__
+## 2. GÜN GİT HUB VE GİT BASH KULLANIM ÖĞRENİMİ
 
 Bu bilgiler başlangıç için gereklidir.
 
