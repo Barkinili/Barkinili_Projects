@@ -1,9 +1,9 @@
-*ASİSPROJELER*
+# ASIS PROJELER
 
-Bu mainde isterler sonucunda elde edilen araştırma sonuçları ve kodlar yer almaktadır.
+Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve kodlar yer almaktadır.
 
-----------------------------------------------------------------------------
-__2. GÜN GİT HUB VE GİT BASH KULLANIM ÖĞRENİMİ__
+---
+## 2. GÜN GİT HUB VE GİT BASH KULLANIM ÖĞRENİMİ__
 
 Bu bilgiler başlangıç için gereklidir.
 
