@@ -8,7 +8,7 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 
 ---
 
-## 📡 UART Nedir?
+##  UART Nedir?
 
 **UART (Universal Asynchronous Receiver Transmitter)**, seri haberleşme protokolüdür. İki cihaz arasında **asenkron** şekilde (yani saat sinyali olmadan) veri gönderimi sağlar.
 
@@ -21,7 +21,7 @@ STM32'de `HAL_UART_Transmit()` veya `HAL_UART_Transmit_DMA()` fonksiyonları ile
 
 ---
 
-## 🚀 DMA Nedir?
+##  DMA Nedir?
 
 **DMA (Direct Memory Access)**, işlemcinin (CPU) müdahalesi olmadan verinin **bellek (RAM) ile çevresel birim (UART, ADC, SPI)** arasında doğrudan taşınmasını sağlar.
 
@@ -35,7 +35,7 @@ DMA ile UART birleştiğinde, veri gönderimi `HAL_UART_Transmit_DMA()` fonksiyo
 
 ---
 
-## 🛠 Fonksiyonlar
+##  Fonksiyonlar
 
 - `HAL_UART_Transmit_DMA(...)`: DMA ile UART gönderimini başlatır.
 - `HAL_UART_TxCpltCallback(...)`: Gönderim tamamlandığında çağrılır.
@@ -43,7 +43,7 @@ DMA ile UART birleştiğinde, veri gönderimi `HAL_UART_Transmit_DMA()` fonksiyo
 
 ---
 
-## 🧠 Notlar
+##  Notlar
 
 - DMA transferi sırasında başka işlem yapılabilir.
 - Buton sürekli basılı tutulsa bile `"merhaba"` sadece bir defa gönderilir.
