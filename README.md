@@ -4,5 +4,5 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 
 ---
 
-## 8. GÜN –
+## 8. GÜN TİMER ile SAYAÇ ÖRNEĞİ
 
