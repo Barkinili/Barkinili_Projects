@@ -6,6 +6,8 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 
 ## 7. GÜN – STM CRC UYGULAMASI 
 
+---
+
 Bugün STM32 mikrodenetleyici üzerinde CRC (Cyclic Redundancy Check) modülünü kullanarak veri bütünlüğü kontrolü gerçekleştirdim. Çalışmalarım aşağıdaki adımlardan oluştu:
 
 Yapılanlar:
