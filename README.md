@@ -6,7 +6,6 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 
 ## 8. GÜN TİMER ile SAYAÇ ÖRNEĞİ
 
----
 
 # STM32F429ZIT6 – TIM7 ile Zaman Takibi
 
