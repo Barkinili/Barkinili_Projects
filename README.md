@@ -55,5 +55,43 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 ## Subnet Mask
 
 * IP adresinin hangi kısmının ağ adresi ve hangi kısmının cihaz adresi olduğunu belirler.
+ 
+Tabii, işte daha sade ve doğal bir dille yazılmış, README dosyasına uygun hali:
+
+---
+
+## Injected Modda ADC Kullanımı
+
+Bu bölümde ADC, injected modda çalışacak şekilde ayarlandı. Önceki örneklerden farklı olarak bu modda ADC, yazılım tarafından değil, Timer 1 tarafından tetikleniyor.
+
+### Yapılanlar
+
+* `ioc` dosyası üzerinden injected mod aktif edildi.
+* Injected modda iki kanal kullanıldı: `VREFINT` ve `TEMPSENSOR`.
+* Tetikleme kaynağı olarak Timer 1'in TRGO sinyali seçildi.
+* Timer 1, her 1 saniyede bir ADC'yi tetikleyecek şekilde ayarlandı.
+
+### Callback Fonksiyonu
+
+ADC dönüşü tamamlandığında aşağıdaki callback fonksiyonu çalışıyor. Burada önce VREF ve sıcaklık sensöründen okunan ADC değerleri alınıyor, ardından sıcaklık değeri hesaplanıyor:
+
+```c
+void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+    if (hadc->Instance == ADC1)
+    {
+        adc1_value[0] = HAL_ADCEx_InjectedGetValue(hadc, ADC_INJECTED_RANK_1);
+        adc1_value[1] = HAL_ADCEx_InjectedGetValue(hadc, ADC_INJECTED_RANK_2);
+
+        Vdda   = 3.3f * (*VREFIN_CAL) / adc1_value[0];
+        Vsense = Vdda * adc1_value[1] / 4095.0f;
+        temp   = ((Vsense - V25) / Avg_slope) + 25.0f;
+    }
+}
+```
+
+Bu yapı sayesinde, sıcaklık değeri her saniye otomatik olarak ölçülüyor. Timer kesmesi kullanmak da mümkün, ancak TRGO tetiklemesi doğrudan ADC'yi çalıştırdığı için buna gerek kalmadan sistem düzgün çalışıyor.
+
+---
 
 
