@@ -60,7 +60,7 @@ Tabii, işte daha sade ve doğal bir dille yazılmış, README dosyasına uygun 
 
 ---
 
-## Injected Modda ADC Kullanımı
+# Injected Modda ADC Kullanımı
 
 Bu bölümde ADC, injected modda çalışacak şekilde ayarlandı. Önceki örneklerden farklı olarak bu modda ADC, yazılım tarafından değil, Timer 1 tarafından tetikleniyor.
 
