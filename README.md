@@ -4,7 +4,7 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 
 ---
 
-## 11. GÜN - TCP-UDP HABERLEŞMESİ ARAŞTIRMASI VE STM'de ADC İNJECTED MODDA ÇALIŞIRILMASI
+## 11. GÜN - TCP-UDP HABERLEŞMESİ ARAŞTIRMASI VE ADC'nin İNJECTED MODDA ÇALIŞIRILMASI
 
 # Ağ Protokolleri ve Temel Ağ Kavramları
 
