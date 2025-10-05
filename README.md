@@ -4,7 +4,7 @@ Bu `main` dosyasında isterler sonucunda elde edilen araştırma sonuçları ve 
 
 ---
 
-## 1. GÜN – GÖMÜLÜ YAZILIM KATMANLARI
+## – GÖMÜLÜ YAZILIM KATMANLARI
 
 ### GÖMÜLÜ YAZILIM KATMANLARI
 
