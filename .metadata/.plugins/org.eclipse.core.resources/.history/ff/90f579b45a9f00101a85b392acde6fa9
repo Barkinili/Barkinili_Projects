@@ -1,0 +1,223 @@
+/*
+  ***************************************************************************************************************
+  ***************************************************************************************************************
+  ***************************************************************************************************************
+
+  File:		  NRF24L01.c
+  Author:     ControllersTech.com
+  Updated:    30th APRIL 2021
+
+  ***************************************************************************************************************
+  Copyright (C) 2017 ControllersTech.com
+
+  This is a free software under the GNU license, you can redistribute it and/or modify it under the terms
+  of the GNU General Public License version 3 as published by the Free Software Foundation.
+  This software library is shared with public for educational purposes, without WARRANTY and Author is not liable for any damages caused directly
+  or indirectly by this software, read more about this on the GNU General Public License.
+
+  ***************************************************************************************************************
+*/
+
+
+#include "stm32f3xx_hal.h"
+#include "NRF24L01.h"
+
+extern SPI_HandleTypeDef hspi1;
+#define NRF24_SPI &hspi1
+
+
+
+
+void spi_transmit(uint8_t buffer, uint8_t size){
+	HAL_SPI_Transmit(&hspi1, &buffer, size, 100);
+}
+
+
+void nRF24_Write_Setup_Of_Automatic_Retransmission(Auto_Retransmit_Delay_Typedef delay,Auto_Retransmit_Count_Typedef Count){
+	uint8_t Temp_Buffer[2]={0x00};
+	Temp_Buffer[0] = W_REGISTER | SETUP_RETR_REG ;
+	Temp_Buffer[1] += delay<<4;
+	Temp_Buffer[1] += count;
+	spi_transmit(Temp_Buffer, sizeof (Temp_Buffer));
+
+
+}
+void nRF24_Read_Register (nRF24_register_t REG){
+	uint8_t Temp_Buffer[2] = {0x00};
+	Temp_Buffer[0] = R_REGISTER |  REG ;
+	Temp_Buffer[1] = 0xFF ;
+	spi_transmit(Temp_Buffer, sizeof (Temp_Buffer));
+}
+
+
+void nRF24_Write_RF_Setup(Air_Datarate_Typedef rate, rf_pwr_typedef power){
+	uint8_t Temp_Buffer[2] = {0x00};
+	Temp_Buffer[0] = W_REGISTER | RF_SETUP_REG ;
+	Temp_Buffer[1] = 0x01;
+	Temp_Buffer[1] += power<<1;
+	Temp_Buffer[1] += rate <<3;
+	spi_transmit(temp_buffer, sizeof (Temp_Buffer));
+
+}
+
+void nRF24_ACTIVE(void){
+	uint8_t Temp_Buffer[2] = {0x00};
+	Temp_Buffer [0] = ACTIVATE;
+	Temp_Buffer [1] = 0x73;
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+
+}
+
+void nRF24_Write_Enable_dynamic_payload_length(uint8_t payload_length){
+    uint8_t Temp_Buffer[2] = {0x00};
+
+    Temp_Buffer[0] = W_REGISTER | DYNPD_REG;
+    Temp_Buffer[1] = payload_length & 0b00111111;
+
+
+    spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+
+void nRF24_Write_EN_AA( uint8_t auto_acknowledge){
+	uint8_t Temp_Buffer[2] = {0x00};
+
+    Temp_Buffer[0] = W_REGISTER | EN_AA_REG;
+    Temp_Buffer[1] = auto_acknowledge & 0b00111111;
+
+    spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+
+}
+
+void nRF24_Write_Enable_RX_Adress (uint8_t enable_rx_adress ){
+	uint8_t Temp_Buffer[2] = {0x00};
+
+	Temp_Buffer[0] = W_REGISTER | EN_AA_REG;
+	Temp_Buffer[1] = enable_rx_adress & 00000011;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+
+}
+
+void nRF24_Write_RX_PW_P0(void){
+	uint8_t Temp_Buffer[2] ={0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RX_PW_P0_REG ;
+	Temp_Buffer[1] = 0x20;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+
+void nRF24_Write_RX_PW_P1(void){
+	uint8_t Temp_Buffer[2] ={0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RX_PW_P1_REG ;
+	Temp_Buffer[1] = 0x20;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+
+void nRF24_Write_RX_PW_P2(void){
+	uint8_t Temp_Buffer[2] ={0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RX_PW_P2_REG ;
+	Temp_Buffer[1] = 0x20;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+
+void nRF24_Write_RX_PW_P3(void){
+	uint8_t Temp_Buffer[2] ={0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RX_PW_P3_REG ;
+	Temp_Buffer[1] = 0x20;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+void nRF24_Write_RX_PW_P4(void){
+	uint8_t Temp_Buffer[2] ={0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RX_PW_P4_REG ;
+	Temp_Buffer[1] = 0x20;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+
+void nRF24_Write_RX_PW_P5(void){
+	uint8_t Temp_Buffer[2] ={0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RX_PW_P5_REG ;
+	Temp_Buffer[1] = 0x20;
+
+	spi_transmit(Temp_Buffer, sizeof(Temp_Buffer));
+}
+
+void nRF24_Write_Setup_AW (Adress_Field_Typedef Adress_Width){
+	uint8_t Temp_Buffer[2] = {0x00};
+
+	Temp_Buffer[0] = W_REGISTER | SETUP_AW_REG;
+	Temp_Buffer[1] = Adress_Width;
+
+}
+
+void nRF24_Write_RF_CH (){
+	uint8_t Temp_Buffer[2] = {0x00};
+
+	Temp_Buffer[0] = W_REGISTER | RF_CH_REG;
+
+
+}
+
+void nRF24_Write_Status (){
+
+}
+
+void nRF24_FLUSH_RX(){
+
+}
+
+void nRF24_FLUSH_TX(){
+
+}
+
+void nRF24_Write_CONFIG(){
+
+}
+
+void nRF24_Read_CONFIG(){
+
+}
+
+void nRF24_Write_RX_ADDR_P0(){
+
+}
+
+
+
+void nRF24_INIT (void){
+	nRF24_Write_Setup_Of_Automatic_Retransmission(Wait_4000us, Up_to_15_Re_Transmit);
+	nRF24_Read_Register(RF_SETUP_REG );
+	nRF24_Write_RF_Setup(data_rate_2m, power_0dbm);
+	nRF24_Read_Register(RF_SETUP_REG );
+	nRF24_Read_Register(FEATURE_REG );
+	nRF24_ACTIVE();
+	nRF24_Read_Register(FEATURE_REG);
+	nRF24_Write_Enable_dynamic_payload_length(0x00);
+	nRF24_Write_EN_AA(ENAA_P0 | ENAA_P1 | ENAA_P2 | ENAA_P3 | ENAA_P4 | ENAA_P5 );
+	nRF24_Write_Enable_RX_Adress( ERX_P0 | ERX_P1);
+	nRF24_Write_RX_PW_P0();
+	nRF24_Write_RX_PW_P1();
+	nRF24_Write_RX_PW_P2();
+	nRF24_Write_RX_PW_P3();
+	nRF24_Write_RX_PW_P4();
+	nRF24_Write_RX_PW_P5();
+	nRF24_Write_Setup_AW(_5bytes);
+
+
+
+}
+
+
+
+
+
+

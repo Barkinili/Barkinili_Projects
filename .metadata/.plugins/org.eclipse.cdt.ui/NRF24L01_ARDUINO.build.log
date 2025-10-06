@@ -1,0 +1,25 @@
+16:22:53 **** Incremental Build of configuration Debug for project NRF24L01_ARDUINO ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/NRF24L01.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/NRF24L01.d" -MT"Core/Src/NRF24L01.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/NRF24L01.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:114:6: error: conflicting types for 'NRF24_Transmit'; have 'void(uint8_t *)' {aka 'void(unsigned char *)'}
+  114 | void NRF24_Transmit(uint8_t* data) {
+      |      ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:24:
+../Core/Inc/NRF24L01.h:29:9: note: previous declaration of 'NRF24_Transmit' with type 'uint8_t(uint8_t *)' {aka 'unsigned char(unsigned char *)'}
+   29 | uint8_t NRF24_Transmit (uint8_t *data);
+      |         ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:165:26: error: expected ';' before '}' token
+  165 |           HAL_Delay(1000)
+      |                          ^
+      |                          ;
+......
+  169 |   }
+      |   ~                       
+make: *** [Core/Src/subdir.mk:37: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+16:22:53 Build Failed. 4 errors, 0 warnings. (took 286ms)
+

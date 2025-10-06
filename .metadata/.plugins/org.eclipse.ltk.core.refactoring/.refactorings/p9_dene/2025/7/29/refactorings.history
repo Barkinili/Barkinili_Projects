@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;p9_dene/p1_dma.ioc&apos; to &apos;p9_dene.ioc&apos;" description="Rename resource &apos;p1_dma.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="p1_dma.ioc" name="p9_dene.ioc" stamp="1752671843026" updateReferences="true"/>
+</session>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;p8_data_led/p7_crc_dma_uart.ioc&apos; to &apos;p8_data_led.ioc&apos;" description="Rename resource &apos;p7_crc_dma_uart.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="p7_crc_dma_uart.ioc" name="p8_data_led.ioc" stamp="1752130336027" updateReferences="true"/>
+</session>

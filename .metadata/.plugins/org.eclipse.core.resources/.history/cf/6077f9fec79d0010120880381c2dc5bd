@@ -1,0 +1,26 @@
+/*******************************************************************************
+ * @Header_Name : NRF24L01.h
+ * @Created_on  : 29 Sep 2025
+ * @Author      : Gokhan PACAL
+ * @About       : STM32 HAL ile NRF24L01 Driver
+ ******************************************************************************/
+#ifndef INC_NRF24L01_H_
+#define INC_NRF24L01_H_
+
+#include "stm32f3xx_hal.h"
+#include <stdint.h>
+
+typedef struct {
+    SPI_HandleTypeDef *hspi;    // SPI handle
+    GPIO_TypeDef *CE_Port;      // CE pin port
+    uint16_t CE_Pin;            // CE pin number
+    GPIO_TypeDef *CSN_Port;     // CSN pin port
+    uint16_t CSN_Pin;           // CSN pin number
+} NRF24L01_Handle_t;
+
+/* Fonksiyon prototipleri */
+void NRF24L01_Init(NRF24L01_Handle_t *nrf);
+void NRF24L01_SetupTxAddress(NRF24L01_Handle_t *nrf, uint8_t *address);
+uint8_t NRF24L01_Transmit(NRF24L01_Handle_t *nrf, uint8_t *data, uint8_t length);
+
+#endif /* INC_NRF24L01_H_ */

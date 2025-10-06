@@ -1,0 +1,10 @@
+16:29:15 **** Incremental Build of configuration Debug for project p7_crc_dma_uart ****
+make -j16 all 
+arm-none-eabi-size  p7_crc_dma_uart.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14780	     28	   2156	  16964	   4244	p7_crc_dma_uart.elf
+Finished building: default.size.stdout
+ 
+
+16:29:15 Build Finished. 0 errors, 0 warnings. (took 181ms)
+

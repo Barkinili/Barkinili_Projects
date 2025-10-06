@@ -1,0 +1,35 @@
+/*******************************************************************************
+ * @Header_Name : NRF24L01.h
+ * @Created_on  : 29 Sep 2025
+ * @Author      : Gokhan PACAL
+ * @Email       : gokhan.pacal@asisguard.com.tr
+ * @About       : Embedded Software Engineer
+ * @Company     : Asisguard
+ * @Copyright   : All Rights @Asisguard
+ ******************************************************************************/
+#ifndef INC_NRF24L01_H_
+#define INC_NRF24L01_H_
+
+#include <stdint.h>
+#include "stm32f3xx_hal.h"
+
+typedef enum {
+    NRF24L01_TX_SUCCESS = 0,
+    NRF24L01_TX_FAIL,
+    NRF24L01_TX_TIMEOUT
+} NRF24L01_Status_t;
+
+typedef struct {
+    SPI_HandleTypeDef *hspi;    // SPI handle
+    GPIO_TypeDef *CE_Port;      // CE pin port (PA3)
+    uint16_t CE_Pin;            // CE pin number
+    GPIO_TypeDef *CSN_Port;     // CSN pin port (PA4)
+    uint16_t CSN_Pin;           // CSN pin number
+} NRF24L01_Handle_t;
+
+/* Fonksiyon prototipleri */
+void NRF24L01_Init(NRF24L01_Handle_t *nrf);
+NRF24L01_Status_t NRF24L01_Transmit(NRF24L01_Handle_t *nrf, uint8_t *data, uint8_t length);
+void NRF24L01_SetupTxAddress(NRF24L01_Handle_t *nrf, uint8_t *address);
+
+#endif /* INC_NRF24L01_H_ */

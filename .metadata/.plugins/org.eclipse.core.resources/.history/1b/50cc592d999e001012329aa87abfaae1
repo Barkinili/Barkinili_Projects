@@ -1,0 +1,167 @@
+/*
+  ***************************************************************************************************************
+  ***************************************************************************************************************
+  ***************************************************************************************************************
+
+  File:		  NRF24L01.h
+  Author:     ControllersTech.com
+  Updated:    30th APRIL 2021
+
+  ***************************************************************************************************************
+  Copyright (C) 2017 ControllersTech.com
+
+  This is a free software under the GNU license, you can redistribute it and/or modify it under the terms
+  of the GNU General Public License version 3 as published by the Free Software Foundation.
+  This software library is shared with public for educational purposes, without WARRANTY and Author is not liable for any damages caused directly
+  or indirectly by this software, read more about this on the GNU General Public License.
+
+  ***************************************************************************************************************
+*/
+
+#ifndef INC_NRF24L01_H_
+#define INC_NRF24L01_H_
+
+
+
+void NRF24_Init (void);
+
+void NRF24_TxMode (uint8_t *Address, uint8_t channel);
+uint8_t NRF24_Transmit (uint8_t *data);
+
+void NRF24_RxMode (uint8_t *Address, uint8_t channel);
+uint8_t isDataAvailable (int pipenum);
+void NRF24_Receive (uint8_t *data);
+
+void NRF24_ReadAll (uint8_t *data);
+
+/* Memory Map */
+#define CONFIG      0x00
+#define EN_AA       0x01
+#define EN_RXADDR   0x02
+#define SETUP_AW    0x03
+#define SETUP_RETR  0x04
+#define RF_CH       0x05
+#define RF_SETUP    0x06
+#define STATUS      0x07
+#define OBSERVE_TX  0x08
+#define CD          0x09
+#define RX_ADDR_P0  0x0A
+#define RX_ADDR_P1  0x0B
+#define RX_ADDR_P2  0x0C
+#define RX_ADDR_P3  0x0D
+#define RX_ADDR_P4  0x0E
+#define RX_ADDR_P5  0x0F
+#define TX_ADDR     0x10
+#define RX_PW_P0    0x11
+#define RX_PW_P1    0x12
+#define RX_PW_P2    0x13
+#define RX_PW_P3    0x14
+#define RX_PW_P4    0x15
+#define RX_PW_P5    0x16
+#define FIFO_STATUS 0x17
+#define DYNPD	    0x1C
+#define FEATURE	    0x1D
+
+
+typedef enum {
+    CONFIG_REG      = 0x00,
+    EN_AA_REG       = 0x01,
+    EN_RXADDR_REG   = 0x02,
+    SETUP_AW_REG    = 0x03,
+    SETUP_RETR_REG  = 0x04,
+    RF_CH_REG       = 0x05,
+    RF_SETUP_REG    = 0x06,
+    STATUS_REG      = 0x07,
+    OBSERVE_TX_REG  = 0x08,
+    CD_REG          = 0x09,
+    RX_ADDR_P0_REG  = 0x0A,
+    RX_ADDR_P1_REG  = 0x0B,
+    RX_ADDR_P2_REG  = 0x0C,
+    RX_ADDR_P3_REG  = 0x0D,
+    RX_ADDR_P4_REG  = 0x0E,
+    RX_ADDR_P5_REG  = 0x0F,
+    TX_ADDR_REG     = 0x10,
+    RX_PW_P0_REG    = 0x11,
+    RX_PW_P1_REG    = 0x12,
+    RX_PW_P2_REG    = 0x13,
+    RX_PW_P3_REG    = 0x14,
+    RX_PW_P4_REG    = 0x15,
+    RX_PW_P5_REG    = 0x16,
+    FIFO_STATUS_REG = 0x17,
+    DYNPD_REG       = 0x1C,
+    FEATURE_REG     = 0x1D
+} nRF24_register_t;
+
+typedef enum {
+	Wait_250us = 0x00,
+	Wait_500us = 0x01,
+	Wait_750us = 0x02,
+	Wait_1000us = 0x03,
+	Wait_1250us = 0x04,
+	Wait_1500us = 0x05,
+	Wait_1750us = 0x06,
+	Wait_2000us = 0x07,
+	Wait_2250us = 0x08,
+	Wait_2500us = 0x09,
+	Wait_2750us = 0x010,
+	Wait_3000us = 0x011,
+	Wait_3250us = 0x012,
+	Wait_3500us = 0x013,
+	Wait_3750us = 0x05,
+	Wait_4000us = 0xFF,
+
+}Auto_Retransmit_Delay_Typedef;
+
+
+typedef enum {
+
+	data_rate_1m =0x00,
+	data_rate_2m =0x01,
+
+}Air_Datarate_Typedef;
+
+typedef enum {
+	power_18dbm = 0x00,
+	power_12dbm = 0x01,
+	power_6dbm = 0x02,
+	power_0dbm = 0x03,
+}rf_pwr_typedef;
+
+
+
+typedef enum {
+	Re_Transmit_disabled = 0x00,
+	Up_to_1_Re_Transmit = 0x01,
+	Up_to_2_Re_Transmit = 0x02,
+	Up_to_3_Re_Transmit = 0x03,
+	Up_to_4_Re_Transmit = 0x04,
+	Up_to_5_Re_Transmit = 0x05,
+	Up_to_6_Re_Transmit = 0x06,
+	Up_to_7_Re_Transmit = 0x07,
+	Up_to_8_Re_Transmit = 0x08,
+	Up_to_9_Re_Transmit = 0x09,
+	Up_to_10_Re_Transmit = 0x10,
+	Up_to_11_Re_Transmit = 0x11,
+	Up_to_12_Re_Transmit = 0x12,
+	Up_to_13_Re_Transmit = 0x13,
+	Up_to_14_Re_Transmit = 0x14,
+	Up_to_15_Re_Transmit = 0x15,
+
+}Auto_Retransmit_Count_Typedef;
+
+/* Instruction Mnemonics */
+#define R_REGISTER    0x00
+#define W_REGISTER    0x20
+#define REGISTER_MASK 0x1F
+#define ACTIVATE      0x50
+#define R_RX_PL_WID   0x60
+#define R_RX_PAYLOAD  0x61
+#define W_TX_PAYLOAD  0xA0
+#define W_ACK_PAYLOAD 0xA8
+#define FLUSH_TX      0xE1
+#define FLUSH_RX      0xE2
+#define REUSE_TX_PL   0xE3
+#define NOP           0xFF
+
+
+#endif /* INC_NRF24L01_H_ */

@@ -1,0 +1,19 @@
+17:41:29 **** Incremental Build of configuration Debug for project p4_crc_timer ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/stm32f4xx_it.c: In function 'TIM2_IRQHandler':
+../Core/Src/stm32f4xx_it.c:207:9: error: 'mikrosaniye' undeclared (first use in this function)
+  207 |         mikrosaniye++;
+      |         ^~~~~~~~~~~
+../Core/Src/stm32f4xx_it.c:207:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/stm32f4xx_it.c:212:25: error: 'milisaniye' undeclared (first use in this function)
+  212 |                         milisaniye++;
+      |                         ^~~~~~~~~~
+../Core/Src/stm32f4xx_it.c:217:33: error: 'saniye' undeclared (first use in this function)
+  217 |                                 saniye++;
+      |                                 ^~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/stm32f4xx_it.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+17:41:30 Build Failed. 4 errors, 0 warnings. (took 421ms)
+

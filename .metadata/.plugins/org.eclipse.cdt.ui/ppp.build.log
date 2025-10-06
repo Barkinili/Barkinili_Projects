@@ -1,0 +1,10 @@
+16:29:16 **** Build of configuration Debug for project ppp ****
+make -j16 all 
+arm-none-eabi-size  ppp.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11916	     12	   1820	  13748	   35b4	ppp.elf
+Finished building: default.size.stdout
+ 
+
+16:29:16 Build Finished. 0 errors, 0 warnings. (took 183ms)
+

@@ -1,0 +1,81 @@
+#include "stm32f3xx_hal.h"
+#include "NRF24L01.h"
+#include "string.h"
+
+extern SPI_HandleTypeDef hspi1;
+#define NRF24_SPI &hspi1
+
+#define NRF24_CE_PORT   GPIOA
+#define NRF24_CE_PIN    GPIO_PIN_3
+
+#define NRF24_CSN_PORT  GPIOA
+#define NRF24_CSN_PIN   GPIO_PIN_4
+
+uint8_t TxAddress[5] = {0xEE, 0xDD, 0xCC, 0xBB, 0xAA};
+uint8_t TxData[32] = "Hello world"; // 32 byte, geri kalan 0x00
+
+void CS_Select(void) { HAL_GPIO_WritePin(NRF24_CSN_PORT, NRF24_CSN_PIN, GPIO_PIN_RESET); }
+void CS_UnSelect(void) { HAL_GPIO_WritePin(NRF24_CSN_PORT, NRF24_CSN_PIN, GPIO_PIN_SET); }
+void CE_Enable(void) { HAL_GPIO_WritePin(NRF24_CE_PORT, NRF24_CE_PIN, GPIO_PIN_SET); }
+void CE_Disable(void) { HAL_GPIO_WritePin(NRF24_CE_PORT, NRF24_CE_PIN, GPIO_PIN_RESET); }
+
+void nrf24_WriteRegMulti(uint8_t reg, uint8_t* data, uint8_t size) {
+    uint8_t cmd = W_REGISTER | (reg & 0x1F);
+    CS_Select();
+    HAL_SPI_Transmit(NRF24_SPI, &cmd, 1, HAL_MAX_DELAY);
+    HAL_SPI_Transmit(NRF24_SPI, data, size, HAL_MAX_DELAY);
+    CS_UnSelect();
+}
+
+void nrf24_WriteReg(uint8_t reg, uint8_t value) {
+    nrf24_WriteRegMulti(reg, &value, 1);
+}
+
+void nrf24_SendPayload(uint8_t* data, uint8_t size) {
+    uint8_t cmd = W_TX_PAYLOAD;
+    CS_Select();
+    HAL_SPI_Transmit(NRF24_SPI, &cmd, 1, HAL_MAX_DELAY);
+    HAL_SPI_Transmit(NRF24_SPI, data, size, HAL_MAX_DELAY);
+    CS_UnSelect();
+}
+
+void NRF24_Init(void) {
+    CE_Disable();
+    HAL_Delay(5);
+
+    // Arduino kütüphanesi ile uyumlu default ayarlar
+    nrf24_WriteReg(CONFIG, 0x0C);     // CRC 2 byte, PWR_UP=0
+    nrf24_WriteReg(EN_AA, 0x00);     // AutoACK kapalı
+    nrf24_WriteReg(EN_RXADDR, 0x01); // Pipe0 aktif, diğerleri kapalı
+    nrf24_WriteReg(SETUP_AW, 0x03);  // 5 byte adres
+    nrf24_WriteReg(SETUP_RETR, 0x00);// Retransmit kapalı
+    nrf24_WriteReg(RF_CH, 10);       // Kanal 10
+    nrf24_WriteReg(RF_SETUP, 0x0E);  // 2Mbps, 0dBm
+    nrf24_WriteRegMulti(TX_ADDR, TxAddress, 5);
+    nrf24_WriteRegMulti(RX_ADDR_P0, TxAddress, 5);
+    CE_Enable();
+    HAL_Delay(5);
+}
+
+void NRF24_Transmit(uint8_t* data) {
+    CE_Disable();
+    HAL_Delay(1);
+    nrf24_SendPayload(data, 32);
+    CE_Enable();
+    HAL_Delay(1);
+    CE_Disable();
+}
+
+int main(void) {
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init();
+    MX_SPI1_Init();
+
+    NRF24_Init();
+
+    while(1) {
+        NRF24_Transmit(TxData);
+        HAL_Delay(1000); // 1 saniye
+    }
+}

@@ -1,0 +1,78 @@
+/*******************************************************************************
+ * @Header_Name : NRF24L01.c
+ * @Created_on  : 29 Sep 2025
+ * @Author      : Gokhan PACAL
+ * @Email       : gokhan.pacal@asisguard.com.tr
+ * @About       : Embedded Software Engineer
+ * @Company     : Asisguard
+ * @Copyright   : All Rights @Asisguard
+ ******************************************************************************/
+
+/******************* Defining Headers *****************************************/
+#include "NRF24L01.h"
+
+/******************* Defining Private Externs *********************************/
+
+/******************* Defining Variables ***************************************/
+
+/******************* Defining Function Protypes *******************************/
+
+/******************* Defining Private Functions *******************************/
+static void NRF24L01_CSN_Low(NRF24L01_Handle_t *nrf) {
+    HAL_GPIO_WritePin(nrf->CSN_Port, nrf->CSN_Pin, GPIO_PIN_RESET);
+}
+
+static void NRF24L01_CSN_High(NRF24L01_Handle_t *nrf) {
+    HAL_GPIO_WritePin(nrf->CSN_Port, nrf->CSN_Pin, GPIO_PIN_SET);
+}
+
+static void NRF24L01_CE_Low(NRF24L01_Handle_t *nrf) {
+    HAL_GPIO_WritePin(nrf->CE_Port, nrf->CE_Pin, GPIO_PIN_RESET);
+}
+
+static void NRF24L01_CE_High(NRF24L01_Handle_t *nrf) {
+    HAL_GPIO_WritePin(nrf->CE_Port, nrf->CE_Pin, GPIO_PIN_SET);
+}
+
+static uint8_t NRF24L01_SPI_TransmitReceive(NRF24L01_Handle_t *nrf, uint8_t data) {
+    uint8_t received;
+    HAL_SPI_TransmitReceive(nrf->hspi, &data, &received, 1, HAL_MAX_DELAY);
+    return received;
+}
+
+/******************* Defining Public Functions *******************************/
+void NRF24L01_Init(NRF24L01_Handle_t *nrf) {
+    // CE ve CSN pinlerini başta kapalı konuma getir
+    NRF24L01_CE_Low(nrf);
+    NRF24L01_CSN_High(nrf);
+
+    // Burada register ayarları yapılabilir
+    // Örn: power up, 1 Mbps, channel, auto-ack vs.
+}
+
+void NRF24L01_SetupTxAddress(NRF24L01_Handle_t *nrf, uint8_t *address) {
+    NRF24L01_CSN_Low(nrf);
+    NRF24L01_SPI_TransmitReceive(nrf, 0x20 | 0x10); // Write TX_ADDR
+    for (uint8_t i = 0; i < 5; i++) {
+        NRF24L01_SPI_TransmitReceive(nrf, address[i]);
+    }
+    NRF24L01_CSN_High(nrf);
+}
+
+NRF24L01_Status_t NRF24L01_Transmit(NRF24L01_Handle_t *nrf, uint8_t *data, uint8_t length) {
+    NRF24L01_CE_Low(nrf);
+    NRF24L01_CSN_Low(nrf);
+    NRF24L01_SPI_TransmitReceive(nrf, 0xA0); // Write payload
+    for (uint8_t i = 0; i < length; i++) {
+        NRF24L01_SPI_TransmitReceive(nrf, data[i]);
+    }
+    NRF24L01_CSN_High(nrf);
+    NRF24L01_CE_High(nrf);
+    HAL_Delay(1);
+    NRF24L01_CE_Low(nrf);
+
+    // Burada ACK kontrolü yapılabilir (IRQ yoksa polling gerekebilir)
+    return NRF24L01_TX_SUCCESS;
+}
+
+/***************************** End of File ************************************/

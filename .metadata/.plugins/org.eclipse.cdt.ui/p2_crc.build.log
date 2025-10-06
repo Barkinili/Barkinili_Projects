@@ -1,0 +1,10 @@
+16:29:13 **** Build of configuration Debug for project p2_crc ****
+make -j16 all 
+arm-none-eabi-size  p2_crc.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5304	     12	   1580	   6896	   1af0	p2_crc.elf
+Finished building: default.size.stdout
+ 
+
+16:29:13 Build Finished. 0 errors, 0 warnings. (took 183ms)
+

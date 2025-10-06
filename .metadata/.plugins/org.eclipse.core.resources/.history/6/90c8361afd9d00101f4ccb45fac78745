@@ -1,0 +1,91 @@
+#include "NRF24L01.h"
+#include "main.h"
+
+extern SPI_HandleTypeDef hspi1;
+
+
+#define NRF24_CE_HIGH() HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET)
+#define NRF24_CE_LOW()  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET)
+
+
+#define NRF24_CSN_HIGH() HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET)
+#define NRF24_CSN_LOW()  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET)
+
+
+static uint8_t NRF24_SPI_Write(uint8_t reg, uint8_t data)
+{
+    uint8_t ret;
+    uint8_t buf[2] = {W_REGISTER | (REGISTER_MASK & reg), data};
+    NRF24_CSN_LOW();
+    HAL_SPI_TransmitReceive(&hspi1, buf, &ret, 2, HAL_MAX_DELAY);
+    NRF24_CSN_HIGH();
+    return ret;
+}
+
+
+static void NRF24_SPI_WritePayload(uint8_t* data, uint8_t len)
+{
+    NRF24_CSN_LOW();
+    uint8_t cmd = W_TX_PAYLOAD;
+    HAL_SPI_Transmit(&hspi1, &cmd, 1, HAL_MAX_DELAY);
+    HAL_SPI_Transmit(&hspi1, data, len, HAL_MAX_DELAY);
+    NRF24_CSN_HIGH();
+}
+
+
+void NRF24_Init(void)
+{
+    NRF24_CE_LOW();
+
+    HAL_Delay(5);
+
+    NRF24_SPI_Write(CONFIG, NRF24_DEFAULT_CONFIG);
+    NRF24_SPI_Write(EN_AA, NRF24_DEFAULT_EN_AA);
+    NRF24_SPI_Write(EN_RXADDR, NRF24_DEFAULT_EN_RXADDR);
+    NRF24_SPI_Write(SETUP_AW, NRF24_DEFAULT_SETUP_AW);
+    NRF24_SPI_Write(SETUP_RETR, NRF24_DEFAULT_SETUP_RETR);
+    NRF24_SPI_Write(RF_CH, NRF24_DEFAULT_RF_CH);
+    NRF24_SPI_Write(RF_SETUP, NRF24_DEFAULT_RF_SETUP);
+    NRF24_SPI_Write(RX_PW_P0, NRF24_DEFAULT_RX_PW_P0);
+
+    HAL_Delay(5);
+}
+
+
+void NRF24_TxMode(uint8_t *Address, uint8_t channel)
+{
+    NRF24_CE_LOW();
+
+
+    NRF24_CSN_LOW();
+    uint8_t cmd = W_REGISTER | TX_ADDR;
+    HAL_SPI_Transmit(&hspi1, &cmd, 1, HAL_MAX_DELAY);
+    HAL_SPI_Transmit(&hspi1, Address, 5, HAL_MAX_DELAY);
+    NRF24_CSN_HIGH();
+
+
+    NRF24_CSN_LOW();
+    cmd = W_REGISTER | RX_ADDR_P0;
+    HAL_SPI_Transmit(&hspi1, &cmd, 1, HAL_MAX_DELAY);
+    HAL_SPI_Transmit(&hspi1, Address, 5, HAL_MAX_DELAY);
+    NRF24_CSN_HIGH();
+
+
+    NRF24_SPI_Write(RF_CH, channel);
+
+
+    NRF24_CE_HIGH();
+}
+
+
+uint8_t NRF24_Transmit(uint8_t *data)
+{
+    NRF24_CE_LOW();
+    NRF24_SPI_WritePayload(data, 32);
+    NRF24_CE_HIGH();
+    HAL_Delay(1);
+    NRF24_CE_LOW();
+
+
+    return 1;
+}

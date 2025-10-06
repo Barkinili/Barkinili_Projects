@@ -1,0 +1,60 @@
+/*
+  ***************************************************************************************************************
+  ***************************************************************************************************************
+  ***************************************************************************************************************
+
+  File:		  NRF24L01.c
+  Author:     ControllersTech.com
+  Updated:    30th APRIL 2021
+
+  ***************************************************************************************************************
+  Copyright (C) 2017 ControllersTech.com
+
+  This is a free software under the GNU license, you can redistribute it and/or modify it under the terms
+  of the GNU General Public License version 3 as published by the Free Software Foundation.
+  This software library is shared with public for educational purposes, without WARRANTY and Author is not liable for any damages caused directly
+  or indirectly by this software, read more about this on the GNU General Public License.
+
+  ***************************************************************************************************************
+*/
+
+
+#include "stm32f3xx_hal.h"
+#include "NRF24L01.h"
+
+extern SPI_HandleTypeDef hspi1;
+#define NRF24_SPI &hspi1
+
+#define NRF24_CE_PORT   GPIOA
+#define NRF24_CE_PIN    GPIO_PIN_3
+
+#define NRF24_CSN_PORT   GPIOA
+#define NRF24_CSN_PIN    GPIO_PIN_4
+
+
+
+
+void spi_transmit(uint8_t buffer, uint8_t size){
+	HAL_SPI_Transmit(&hspi1, &buffer, size, 100);
+}
+
+
+void nrf24_write_Setup_of_Automatic_Retransmission(Auto_Retransmit_Delay_Typedef delay,Auto_Retransmit_Count_Typedef Count){
+	uint8_t temp_buffer[2]={0x00};
+	temp_buffer[0] = W_REGISTER | RF_SETUP_REG  ;
+	temp_buffer[1] = delay<<4;
+	temp_buffer[1] += count;
+	spi_transmit(temp_buffer, sizeof (temp_buffer));
+
+
+
+}
+
+
+
+
+
+
+
+
+

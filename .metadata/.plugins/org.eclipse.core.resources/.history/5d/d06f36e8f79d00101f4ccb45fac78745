@@ -1,0 +1,187 @@
+/*
+ * NRF24L01.c
+ *
+ * Clean STM32 HAL implementation
+ */
+
+#include "NRF24L01.h"
+#include "stm32f3xx_hal.h"
+
+
+extern SPI_HandleTypeDef hspi1;
+#define NRF24_SPI   &hspi1
+
+
+#define NRF24_CE_PORT   GPIOA
+#define NRF24_CE_PIN    GPIO_PIN_3
+
+#define NRF24_CSN_PORT  GPIOA
+#define NRF24_CSN_PIN   GPIO_PIN_4
+
+
+static void CSN_Low(void)   { HAL_GPIO_WritePin(NRF24_CSN_PORT, NRF24_CSN_PIN, GPIO_PIN_RESET); }
+static void CSN_High(void)  { HAL_GPIO_WritePin(NRF24_CSN_PORT, NRF24_CSN_PIN, GPIO_PIN_SET); }
+static void CE_Low(void)    { HAL_GPIO_WritePin(NRF24_CE_PORT, NRF24_CE_PIN, GPIO_PIN_RESET); }
+static void CE_High(void)   { HAL_GPIO_WritePin(NRF24_CE_PORT, NRF24_CE_PIN, GPIO_PIN_SET); }
+
+static uint8_t SPI_Transfer(uint8_t data)
+{
+    uint8_t rx;
+    HAL_SPI_TransmitReceive(NRF24_SPI, &data, &rx, 1, HAL_MAX_DELAY);
+    return rx;
+}
+
+// --------- Register İşlemleri ---------
+void NRF24_WriteRegister(uint8_t reg, uint8_t value)
+{
+    CSN_Low();
+    SPI_Transfer(W_REGISTER | (REGISTER_MASK & reg));
+    SPI_Transfer(value);
+    CSN_High();
+}
+
+uint8_t NRF24_ReadRegister(uint8_t reg)
+{
+    CSN_Low();
+    SPI_Transfer(R_REGISTER | (REGISTER_MASK & reg));
+    uint8_t result = SPI_Transfer(NOP);
+    CSN_High();
+    return result;
+}
+
+void NRF24_WriteRegisterMulti(uint8_t reg, uint8_t *data, uint8_t length)
+{
+    CSN_Low();
+    SPI_Transfer(W_REGISTER | (REGISTER_MASK & reg));
+    HAL_SPI_Transmit(NRF24_SPI, data, length, HAL_MAX_DELAY);
+    CSN_High();
+}
+
+void NRF24_ReadRegisterMulti(uint8_t reg, uint8_t *data, uint8_t length)
+{
+    CSN_Low();
+    SPI_Transfer(R_REGISTER | (REGISTER_MASK & reg));
+    HAL_SPI_Receive(NRF24_SPI, data, length, HAL_MAX_DELAY);
+    CSN_High();
+}
+
+void NRF24_SendCommand(uint8_t cmd)
+{
+    CSN_Low();
+    SPI_Transfer(cmd);
+    CSN_High();
+}
+
+// --------- Ana Fonksiyonlar ---------
+void NRF24_Init(void)
+{
+    CE_Low();
+    HAL_Delay(5);
+
+    NRF24_WriteRegister(CONFIG, 0x0A);      // CRC enable, PWR_UP=0
+    NRF24_WriteRegister(EN_AA, 0x01);       // Auto-ACK pipe0
+    NRF24_WriteRegister(EN_RXADDR, 0x01);   // Enable data pipe0
+    NRF24_WriteRegister(SETUP_AW, 0x03);    // 5-byte address
+    NRF24_WriteRegister(SETUP_RETR, 0x3F);  // 15 retransmit, 4000us delay
+    NRF24_WriteRegister(RF_CH, 10);         // Channel 10
+    NRF24_WriteRegister(RF_SETUP, 0x0F);    // 2 Mbps, 0dBm
+    NRF24_WriteRegister(STATUS, 0x70);      // Clear IRQ flags
+
+    NRF24_SendCommand(FLUSH_TX);
+    NRF24_SendCommand(FLUSH_RX);
+
+    CE_High();
+}
+
+void NRF24_TxMode(uint8_t *Address, uint8_t channel)
+{
+    CE_Low();
+
+    NRF24_WriteRegister(RF_CH, channel);
+
+    NRF24_WriteRegisterMulti(TX_ADDR, Address, 5);
+    NRF24_WriteRegisterMulti(RX_ADDR_P0, Address, 5);
+
+    NRF24_WriteRegister(RX_PW_P0, 32);  // Payload length
+
+    uint8_t config = NRF24_ReadRegister(CONFIG);
+    config = (config | (1<<1)) & ~(1<<0); // PWR_UP=1, PRIM_RX=0
+    NRF24_WriteRegister(CONFIG, config);
+
+    CE_High();
+    HAL_Delay(2);
+}
+
+uint8_t NRF24_Transmit(uint8_t *data)
+{
+    uint8_t status;
+
+    CE_Low();
+    CSN_Low();
+    SPI_Transfer(W_TX_PAYLOAD);
+    HAL_SPI_Transmit(NRF24_SPI, data, 32, HAL_MAX_DELAY);
+    CSN_High();
+    CE_High();
+
+    // Paket gidene kadar bekle
+    do {
+        status = NRF24_ReadRegister(STATUS);
+    } while (!(status & ((1<<5) | (1<<4)))); // TX_DS veya MAX_RT bekle
+
+    if (status & (1<<5)) { // Data Sent
+        NRF24_WriteRegister(STATUS, (1<<5));
+        return 1;
+    }
+    else if (status & (1<<4)) { // Max Retransmit
+        NRF24_WriteRegister(STATUS, (1<<4));
+        NRF24_SendCommand(FLUSH_TX);
+        return 0;
+    }
+
+    return 0;
+}
+
+void NRF24_RxMode(uint8_t *Address, uint8_t channel)
+{
+    CE_Low();
+
+    NRF24_WriteRegister(RF_CH, channel);
+
+    NRF24_WriteRegisterMulti(RX_ADDR_P0, Address, 5);
+    NRF24_WriteRegister(RX_PW_P0, 32);
+
+    uint8_t config = NRF24_ReadRegister(CONFIG);
+    config |= (1<<1) | (1<<0); // PWR_UP=1, PRIM_RX=1
+    NRF24_WriteRegister(CONFIG, config);
+
+    CE_High();
+    HAL_Delay(2);
+}
+
+uint8_t isDataAvailable(int pipenum)
+{
+    uint8_t status = NRF24_ReadRegister(STATUS);
+    if (status & (1<<6)) {
+        NRF24_WriteRegister(STATUS, (1<<6));
+        return 1;
+    }
+    return 0;
+}
+
+void NRF24_Receive(uint8_t *data)
+{
+    CSN_Low();
+    SPI_Transfer(R_RX_PAYLOAD);
+    HAL_SPI_Receive(NRF24_SPI, data, 32, HAL_MAX_DELAY);
+    CSN_High();
+
+    NRF24_WriteRegister(STATUS, (1<<6));
+    NRF24_SendCommand(FLUSH_RX);
+}
+
+void NRF24_ReadAll(uint8_t *data)
+{
+    for (uint8_t i = 0; i < 0x1D; i++) {
+        data[i] = NRF24_ReadRegister(i);
+    }
+}

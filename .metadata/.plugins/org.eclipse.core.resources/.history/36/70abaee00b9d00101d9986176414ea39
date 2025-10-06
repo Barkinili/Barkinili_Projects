@@ -1,0 +1,15 @@
+/*
+ * nrf24_hal.h
+ *
+ *  Created on: Sep 29, 2025
+ *      Author: barki
+ */
+
+#ifndef INC_NRF24_HAL_H_
+#define INC_NRF24_HAL_H_
+
+
+
+
+
+#endif /* INC_NRF24_HAL_H_ */

@@ -1,0 +1,10 @@
+09:49:45 **** Incremental Build of configuration Debug for project p2_crc_den ****
+make -j16 all 
+arm-none-eabi-size  p2_crc_den.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10928	     12	   1652	  12592	   3130	p2_crc_den.elf
+Finished building: default.size.stdout
+ 
+
+09:49:45 Build Finished. 0 errors, 0 warnings. (took 192ms)
+

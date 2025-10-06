@@ -1,0 +1,10 @@
+14:13:35 **** Build of configuration Debug for project p8_data_led ****
+make -j16 all 
+arm-none-eabi-size  p8_data_led.elf 
+   text	   data	    bss	    dec	    hex	filename
+  33104	    476	   2508	  36088	   8cf8	p8_data_led.elf
+Finished building: default.size.stdout
+ 
+
+14:13:35 Build Finished. 0 errors, 0 warnings. (took 416ms)
+
